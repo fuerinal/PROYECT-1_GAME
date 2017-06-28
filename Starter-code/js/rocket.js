@@ -7,6 +7,7 @@ function Rocket(name, offsets, vel, velRocket,heightPrepare,theme) {
   this.heightPrepare = heightPrepare;
   this.theme = theme;
 
+
   // rocketX = $("#rocket").position().left;
   // rocketY = $("#rocket").position().top;
 }
@@ -18,7 +19,7 @@ Rocket.prototype.moveLeft = function() {
   this.posX -= this.velRocket;
 
 };
-Obstacle.prototype.prepare = function() {
+Rocket.prototype.prepare = function() {
 
   this.posY -= this.vel;
   if (this.heightPrepare<this.posY ) {
