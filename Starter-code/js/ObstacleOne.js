@@ -1,22 +1,17 @@
-function ObstacleOne(obstacleY, vel, time, direction, box) {
-
-  this.obstacleY = obstacleY;
+function Obstacle(name, vel, offsets) {
+  this.name = name;
+  this.posX = offsets.offX;
+  this.posY = offsets.offY;
   this.vel = vel;
-  this.time = time;
-  this.direction = direction;
-  this.box = box;
-  this.maxheight = 1000;
-  // this.time=20;
 
 
-  console.log(this.obstacleY);
 }
 
+Obstacle.prototype.move = function() {
+  this.posY += this.vel;
+};
 
-ObstacleOne.prototype.move = function() {
-
-
-  var that = this;
+/*  var that = this;
     switch (that.direction) {
 
       case 1:
@@ -37,6 +32,4 @@ ObstacleOne.prototype.move = function() {
           });
           that.obstacleY = $(that.box).position().top;
         }
-    }
-
-};
+    }*/

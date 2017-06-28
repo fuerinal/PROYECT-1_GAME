@@ -1,67 +1,52 @@
-function Rocket(moveLeft, moveRight) {
+function Rocket(name, offsets, vel, velRocket,heightPrepare,theme) {
+  this.name = name;
+  this.posX = offsets.offX;
+  this.posY = offsets.offY;
+  this.vel = vel;
+  this.velRocket = velRocket;
+  this.heightPrepare = heightPrepare;
+  this.theme = theme;
 
-  this.moveLeft = moveLeft;
-  this.moveRight = moveRight;
-
-  rocketX = $("#rocket").position().left;
-  rocketY = $("#rocket").position().top;
+  // rocketX = $("#rocket").position().left;
+  // rocketY = $("#rocket").position().top;
 }
-Rocket.prototype.activeMove = function() {
 
-  var that = this;
-  var i = 1;
-  $(document).on('keydown', function(e) {
-    switch (e.keyCode) {
-
-      case 65:
-        console.log("LEft");
-        that.moveLeft = true;
-        break;
-
-      case 68:
-        console.log("Right");
-        that.moveRight = true;
-        break;
-
-    }
-  });
-
-  $(document).on('keyup', function(a) {
-    switch (a.keyCode) {
-
-
-      case 68:
-        that.moveLeft = false;
-        console.log("LEftFALSE");
-        break;
-
-      case 65:
-        that.moveRight = false;
-        console.log("LEftRIGHT");
-        break;
-
-    }
-  });
-
-
+Rocket.prototype.moveRight = function() {
+  this.posX += this.velRocket;
+};
+Rocket.prototype.moveLeft = function() {
+  this.posX -= this.velRocket;
 
 };
+Obstacle.prototype.prepare = function() {
 
-Rocket.prototype.moveXR = function() {
-  console.log("Rightworks");
-  $("#rocket").css({
-    left: $("#rocket").position().left - 15
-  });
+  this.posY -= this.vel;
+  if (this.heightPrepare<this.posY ) {
 
-};
-Rocket.prototype.moveXL = function() {
-  console.log("Leftworks");
-  $("#rocket").css({
-    left: $("#rocket").position().left + 15
-  });
+  }
 };
 
-function collision() {
-}
-function canmove() {
-}
+
+
+
+//
+// Rocket.prototype.appear = function functionName() {
+//   var that = this;
+//   switch (that.direction) {
+//     case 1:
+//       that.obstacleY = $(that.box).position().top;
+//       that.obstacleY -= that.vel;
+//       $(that.box).css({
+//         top: that.obstacleY
+//       });
+//       that.obstacleY = $(that.box).position().top;
+//       if (that.obstacleY < 700) {
+//         that.direction = 2;
+//       }
+//       break;
+//     case 2:
+//       break;
+//   }
+// };
+
+function collision() {}

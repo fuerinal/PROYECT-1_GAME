@@ -1,69 +1,24 @@
 body {
   padding: 0;
   margin: 0;
-  background-image: url("../img/tenor.gif");
-  width: 100%
+  background-image:  url("../img/tenor.gif");
+  width: 100%;
+  overflow: hidden;
+
+
 }
 
-.obstacle {
-  width: 500px;
-  height: 50px;
-  margin-right: 150px;
-  float: right;
-  background-image: url("../img/obstacle.gif");
-  display: inline-block;
-  border-radius: 5px;
-  border: solid 1px white;
-  box-shadow: 0px 0px 80px red;
-}
-
-#box1 {
-  position: relative;
-  left: 200px;
-  top: 100px;
-  display: inline-block;
-  z-index: 1;
-}
-
-#box2 {
-  position: relative;
-  left: 200px;
-  top: 300px;
-  display: inline-block;
-  z-index: 1;
-}
-
-#box3 {
-  position: relative;
-  left: 200px;
-  top: 500px;
-  display: inline-block;
-  z-index: 1;
-}
-
-#box4 {
-  position: relative;
-  left: 100px;
-  top: 700px;
-  display: inline-block;
-  z-index: 1;
-}
-
-#rocket {
+.rocket {
   position: absolute;
-  top: 600px;
-  left: 600px;
-  width: 50px;
-  height: 40px;
-  float: right;
-  z-index: 1;
+  width: 200px;
+  height:  150px;
+  z-index: 2;
+  /*border: solid 1px white;*/
+  box-shadow: 0px 0px 20px;
+  background: url('../img/frame-01.gif');
 }
 
-#rocket_image {
-  width: 140px;
-  border-radius: 80px;
-  box-shadow: 0px 0px 120px green;
-}
+
 
 #star_image {
   position: absolute;
@@ -73,34 +28,37 @@ body {
   z-index: 0;
 }
 
-#asteroid {
+.asteroid {
   position: absolute;
-  left: 200px;
-  top: 0px;
-  width: 250px;
+  width: 200px;
+  height: 200px;
   z-index: 1;
-  display: none;
+  /*border: solid 1px white;*/
+  background: url('../img/Asteroide.gif');
 }
 
-#asteroid2 {
-  position: absolute;
-  left: 500px;
-  top: 0px;
-  width: 250px;
-  z-index: 1;
-  display: none;
-}
-#hide{
-
+#hide {
   position: absolute;
   top: 700px;
-
   width: 100%;
   height: 200px;
   z-index: 2;
 
 }
-#start {
+.shot{
+  position:absolute;
+  left: 700px;
+  top: 700px;
+  width: 3px;
+  height: 20px;
+  background-color: red;
+  border: solid 1px red;
+  box-shadow: 0px 0px 100px darkred;
+
+
+}
+
+/*#start {
   position: absolute;
   left: 750px;
   top: 740px;
@@ -112,4 +70,4 @@ body {
   text-transform: uppercase;
   border: solid 2px black;
   box-shadow: 0px 0px 20px white;
-}
+}*/
