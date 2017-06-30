@@ -396,7 +396,7 @@ Game.prototype.checkobstacles = function() {
 
   }
   var intervarID = setInterval(function() {
-    if (i > 1100) {
+    if (i > 5100) {
       console.log("Timeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeee");
       clearInterval(intervarID);
       var win = $('<div>').attr('id', '#winn').addClass('win');
