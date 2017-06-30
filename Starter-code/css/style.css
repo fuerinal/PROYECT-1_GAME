@@ -1,27 +1,22 @@
 body {
   padding: 0;
   margin: 0;
-  background-image:  url("../img/tenor.gif");
+  background-image: url("../img/tenor.gif");
   width: 100%;
   overflow: hidden;
-
-
 }
 
 .rocket {
   position: absolute;
   width: 160px;
-  height:  150px;
+  height: 150px;
   z-index: 2;
   /*border: solid 1px white;*/
   /*box-shadow: 0px 0px 20px;*/
   background: url('../img/frame-01.gif');
   background-size: 120%;
   margin: 0;
-
 }
-
-
 
 #star_image {
   position: absolute;
@@ -29,6 +24,8 @@ body {
   left: 50px;
   width: 400px;
   z-index: 0;
+  display:
+
 }
 
 .asteroid {
@@ -38,7 +35,6 @@ body {
   z-index: 1;
   /*border: solid 1px white;*/
   background: url('../img/Asteroide.gif');
-
   /*border: solid 1px white;*/
 }
 
@@ -48,45 +44,65 @@ body {
   width: 100%;
   height: 200px;
   z-index: 2;
-
 }
-.shot{
-  position:absolute;
 
+.shot {
+  position: absolute;
   width: 2px;
   height: 20px;
   background-color: red;
   border: solid 1px red;
   box-shadow: 0px 0px 100px darkred;
   z-index: 1;
-
-
 }
-.score{
+
+.score {
   color: white;
   font-family: sans-serif;
   font-size: 50px;
   position: absolute;
   top: 900px;
-  left:100px;
-  z-index: 3;
+  left: 100px;
+  z-index: 4;
   width: 100px;
-
 }
-.score_value{
 
-}
-.time{
+.score_value {}
+
+.time {
   color: white;
   font-family: sans-serif;
   font-size: 50px;
   position: absolute;
   top: 900px;
-  left:360px;
+  left: 360px;
   z-index: 2;
   width: 100px;
-
 }
+
+.lose {
+  color: white;
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  font-size: 120px;
+  text-align: center;
+  background-color: black;
+  z-index: 3;
+}
+
+.win {
+  color: white;
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  font-size: 120px;
+  text-align: center;
+  background-color: black;
+  z-index: 3;
+}
+
+
 /*
 #start {
   position: absolute;

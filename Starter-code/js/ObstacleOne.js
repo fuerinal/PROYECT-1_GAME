@@ -4,10 +4,8 @@ function Obstacle(name, vel, offsets) {
   this.posY = offsets.offY;
   this.vel = vel;
   setInterval(function() {
-  this.vel+=1;
+  this.vel+=100;
   }, 40);
-
-
 }
 
 Obstacle.prototype.move = function() {

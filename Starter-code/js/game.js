@@ -173,25 +173,43 @@ Game.prototype.moveObjects = function() {
   });
 };
 Game.prototype.checkobstacles = function() {
-  var time=60;
-  setInterval(function() {
-    time-=1;
+  var time = 60;
+  var i = 0;
+  var timerID = setInterval(function() {
+    time -= 1;
     $(".score_time").text(time);
-
+    if (time === 0) {
+      console.log("Timeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeee");
+      clearInterval(timerID);
+      var lose = $('<div>').attr('id', '#losee').addClass('lose');
+      $('body').append(lose);
+      $(".lose").text('Time over...You Lose');
+    }
   }, 1000);
-  var i=0;
-  function checkObstacles() {
-    var impactoA, impactoB, impactoC, impactoD, impactoE = false;
 
+
+  var impactoA, impactoB, impactoC, impactoD, impactoE = false;
+  var hideA = false,
+    hideB = false,
+    hideC = false,
+    hideD = false,
+    hideE = false;
+
+  function checkObstacles() {
+
+
+    //COLISIONES ASTEROID
     if ($(".shot").collision("#asteroidA").length > 0) {
       console.log("ImpactoA");
       impactoA = true;
+      hideA = true;
       if (impactoA === true) {
-        i=i+10;
+        i = i + 10;
         $("#asteroidA").css('background', 'url(img/explosion.gif)');
         setTimeout(function() {
-          $("#asteroidA").css('background', 'url(img/Money.gif)');
+          $("#asteroidA").css('visibility', 'hidden');
         }, 200);
+
 
         setTimeout(function() {
           $("#asteroidA").css('background', 'url(img/Asteroide.gif)');
@@ -203,75 +221,180 @@ Game.prototype.checkobstacles = function() {
     if ($(".shot").collision("#asteroidB").length > 0) {
       console.log("ImpactoB");
       impactoB = true;
+      hideB = true;
       if (impactoB === true) {
-        i=i+10;
+        i = i + 10;
         $("#asteroidB").css('background', 'url(img/explosion.gif)');
         setTimeout(function() {
-          $("#asteroidB").css('background', 'url(img/Money.gif)');
+          $("#asteroidB").css('visibility', 'hidden');
         }, 200);
 
         setTimeout(function() {
           $("#asteroidB").css('background', 'url(img/Asteroide.gif)');
         }, 500);
 
+
       }
     }
     if ($(".shot").collision("#asteroidC").length > 0) {
       console.log("ImpactoC");
       impactoC = true;
+      hideC = true;
       if (impactoC === true) {
-        i=i+10;
+        i = i + 10;
         $("#asteroidC").css('background', 'url(img/explosion.gif)');
         setTimeout(function() {
-          $("#asteroidC").css('background', 'url(img/Money.gif)');
+          $("#asteroidC").css('visibility', 'hidden');
         }, 200);
         setTimeout(function() {
           $("#asteroidC").css('background', 'url(img/Asteroide.gif)');
         }, 500);
+
       }
     }
     if ($(".shot").collision("#asteroidD").length > 0) {
       console.log("ImpactoD");
       impactoD = true;
+      hideD = true;
       if (impactoD === true) {
-        i=i+10;
+        i = i + 10;
         $("#asteroidD").css('background', 'url(img/explosion.gif)');
         setTimeout(function() {
-          $("#asteroidD").css('background', 'url(img/Money.gif)');
+          $("#asteroidD").css('visibility', 'hidden');
         }, 200);
         setTimeout(function() {
           $("#asteroidD").css('background', 'url(img/Asteroide.gif)');
         }, 500);
+
       }
     }
     if ($(".shot").collision("#asteroidE").length > 0) {
       console.log("ImpactorocketE");
       impactoE = true;
+      hideE = true;
       if (impactoE === true) {
-        i=i+10;
+        i = i + 10;
         $("#asteroidE").css('background', 'url(img/explosion.gif)');
         setTimeout(function() {
-          $("#asteroidE").css('background', 'url(img/Money.gif)');
+          $("#asteroidE").css('visibility', 'hidden');
         }, 200);
         setTimeout(function() {
           $("#asteroidE").css('background', 'url(img/Asteroide.gif)');
         }, 500);
+
       }
     }
-    if ($(".rocket").collision(".asteroid").length > 0) {
-      console.log("ImpactorocketE");
-      $(".rocket").css('background', 'url(img/explosion.gif)');
-      setTimeout(function() {
-        
-      }, 500);
+    //COLISIONES ROCKET
+    if (hideA == false) {
+
+
+      if ($(".rocket").collision("#asteroidA").length > 0) {
+        console.log("ImpactorocketE");
+        $(".rocket").css('background', 'url(img/explosion.gif)');
+        setTimeout(function() {
+          var lose = $('<div>').attr('id', '#losee').addClass('lose');
+          $('body').append(lose);
+          $(".lose").text('Crash...You Lose');
+
+        }, 200);
+      }
+    }
+    if (hideB == false) {
+      if ($(".rocket").collision("#asteroidB").length > 0) {
+        console.log("ImpactorocketE");
+        $(".rocket").css('background', 'url(img/explosion.gif)');
+        setTimeout(function() {
+          var lose = $('<div>').attr('id', '#losee').addClass('lose');
+          $('body').append(lose);
+          $(".lose").text('Crash...You Lose');
+        }, 500);
+      }
+    }
+    if (hideC == false) {
+      if ($(".rocket").collision("#asteroidC").length > 0) {
+        console.log("ImpactorocketE");
+        $(".rocket").css('background', 'url(img/explosion.gif)');
+        setTimeout(function() {
+          var lose = $('<div>').attr('id', '#losee').addClass('lose');
+          $('body').append(lose);
+          $(".lose").text('Crash...You Lose');
+        }, 500);
+      }
+    }
+    if (hideD == false) {
+      if ($(".rocket").collision("#asteroidD").length > 0) {
+        console.log("ImpactorocketE");
+        $(".rocket").css('background', 'url(img/explosion.gif)');
+        setTimeout(function() {
+          var lose = $('<div>').attr('id', '#losee').addClass('lose');
+          $('body').append(lose);
+          $(".lose").text('Crash...You Lose');
+        }, 500);
+      }
+    }
+    if (hideE == false) {
+      if ($(".rocket").collision("#asteroidE").length > 0) {
+        console.log("ImpactorocketE");
+        $(".rocket").css('background', 'url(img/explosion.gif)');
+        setTimeout(function() {
+          var lose = $('<div>').attr('id', '#losee').addClass('lose');
+          $('body').append(lose);
+          $(".lose").text('Crash...You Lose');
+        }, 500);
+      }
+    }
+    if ($("#asteroidA").position().top > 970) {
+      hideA = false;
+      $("#asteroidA").css('visibility', 'visible');
 
     }
+    if ($("#asteroidB").position().top > 970) {
+      hideB = false;
+      $("#asteroidB").css('visibility', 'visible');
+
+    }
+    if ($("#asteroidC").position().top > 970) {
+      hideC = false;
+      $("#asteroidC").css('visibility', 'visible');
+
+    }
+    if ($("#asteroidD").position().top > 970) {
+      hideD = false;
+      $("#asteroidD").css('visibility', 'visible');
+
+    }
+    if ($("#asteroidE").position().top > 970) {
+      hideE = false;
+      $("#asteroidE").css('visibility', 'visible');
+
+    }
+
+
 
 
   }
-  setInterval(function() {
+  if (i > 1000) {
+    this.SoundMenu.pause();
+    var u = $('<div>').attr('id', '#winn').addClass('win');
+    $('body').append(u);
+
+    // console.log("FIn");
+    clearInterval(intervarID);
+
+  }
+  var intervarID = setInterval(function() {
+    if (i > 1100) {
+      console.log("Timeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeee");
+      clearInterval(intervarID);
+      var win = $('<div>').attr('id', '#winn').addClass('win');
+      $('body').append(win);
+      $(".win").text('You Win');
+    }
     $(".score_value").text(i);
+
     checkObstacles();
   }, 40);
+
 };
+
 Game();
