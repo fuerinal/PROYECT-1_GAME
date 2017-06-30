@@ -1,4 +1,6 @@
 function Obstacle(name, vel, offsets) {
+
+  
   this.name = name;
   this.posX = offsets.offX;
   this.posY = offsets.offY;

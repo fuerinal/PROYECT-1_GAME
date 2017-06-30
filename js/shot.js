@@ -1,4 +1,6 @@
 function Shot(name, offsets, vel, id) {
+
+  
   this.name = name;
   this.posX = offsets.offX;
   this.posY = offsets.offY;
