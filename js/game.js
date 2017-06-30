@@ -175,7 +175,7 @@ Game.prototype.moveObjects = function() {
 Game.prototype.checkobstacles = function() {
   var soundE= new Audio('sounds/Big_Bomb.mp3');
   var soundER= new Audio('sounds/Big_BombB.mp3');
-  var time = 60;
+  var time = 30;
   var i = 0;
   var timerID = setInterval(function() {
     time -= 1;
@@ -396,7 +396,7 @@ Game.prototype.checkobstacles = function() {
 
   }
   var intervarID = setInterval(function() {
-    if (i > 5100) {
+    if (i > 1000) {
       console.log("Timeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeee");
       clearInterval(intervarID);
       var win = $('<div>').attr('id', '#winn').addClass('win');
