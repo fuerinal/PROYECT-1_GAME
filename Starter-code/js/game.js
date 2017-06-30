@@ -21,7 +21,7 @@ function Game() {
 Game.prototype.CreateObstacles = function() {
   var i = 0;
   this.obstacles = ["A", "B", "C", "D", "E"].map(function(e, i) {
-    var speed = (Math.random() * 100 + 150) / this.fps;
+    var speed = (Math.random() * 150 + 250) / this.fps;
     return new Obstacle('asteroid' + e, speed, {
       offX: Math.random() * 400 + 400 * i,
       offY: 0
