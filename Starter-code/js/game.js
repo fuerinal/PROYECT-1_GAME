@@ -21,7 +21,7 @@ function Game() {
 Game.prototype.CreateObstacles = function() {
   var i = 0;
   this.obstacles = ["A", "B", "C", "D", "E"].map(function(e, i) {
-    var speed = (Math.random() * 150 + 250) / this.fps;
+    var speed = (Math.random() * 250 + 450) / this.fps;
     return new Obstacle('asteroid' + e, speed, {
       offX: Math.random() * 400 + 400 * i,
       offY: 0
@@ -99,7 +99,7 @@ Game.prototype.moveObjects = function() {
       e.move();
       var el = $("#" + e.name);
       el.css({
-        top: e.posY % 1000,
+        top: e.posY % 1300,
         left: e.posX
       });
     });
@@ -173,6 +173,8 @@ Game.prototype.moveObjects = function() {
   });
 };
 Game.prototype.checkobstacles = function() {
+  var soundE= new Audio('sounds/Big_Bomb.mp3');
+  var soundER= new Audio('sounds/Big_BombB.mp3');
   var time = 60;
   var i = 0;
   var timerID = setInterval(function() {
@@ -204,18 +206,16 @@ Game.prototype.checkobstacles = function() {
       impactoA = true;
       hideA = true;
       if (impactoA === true) {
+        soundE.play();
         i = i + 10;
         $("#asteroidA").css('background', 'url(img/explosion.gif)');
         setTimeout(function() {
           $("#asteroidA").css('visibility', 'hidden');
         }, 200);
 
-
         setTimeout(function() {
           $("#asteroidA").css('background', 'url(img/Asteroide.gif)');
-
         }, 500);
-
       }
     }
     if ($(".shot").collision("#asteroidB").length > 0) {
@@ -223,6 +223,7 @@ Game.prototype.checkobstacles = function() {
       impactoB = true;
       hideB = true;
       if (impactoB === true) {
+        soundE.play();
         i = i + 10;
         $("#asteroidB").css('background', 'url(img/explosion.gif)');
         setTimeout(function() {
@@ -241,6 +242,7 @@ Game.prototype.checkobstacles = function() {
       impactoC = true;
       hideC = true;
       if (impactoC === true) {
+        soundE.play();
         i = i + 10;
         $("#asteroidC").css('background', 'url(img/explosion.gif)');
         setTimeout(function() {
@@ -257,6 +259,7 @@ Game.prototype.checkobstacles = function() {
       impactoD = true;
       hideD = true;
       if (impactoD === true) {
+        soundE.play();
         i = i + 10;
         $("#asteroidD").css('background', 'url(img/explosion.gif)');
         setTimeout(function() {
@@ -273,6 +276,7 @@ Game.prototype.checkobstacles = function() {
       impactoE = true;
       hideE = true;
       if (impactoE === true) {
+        soundE.play();
         i = i + 10;
         $("#asteroidE").css('background', 'url(img/explosion.gif)');
         setTimeout(function() {
@@ -289,6 +293,8 @@ Game.prototype.checkobstacles = function() {
 
 
       if ($(".rocket").collision("#asteroidA").length > 0) {
+        soundER.play();
+
         console.log("ImpactorocketE");
         $(".rocket").css('background', 'url(img/explosion.gif)');
         setTimeout(function() {
@@ -296,77 +302,84 @@ Game.prototype.checkobstacles = function() {
           $('body').append(lose);
           $(".lose").text('Crash...You Lose');
 
-        }, 200);
+        }, 500);
       }
     }
     if (hideB == false) {
       if ($(".rocket").collision("#asteroidB").length > 0) {
+        soundER.play();
         console.log("ImpactorocketE");
         $(".rocket").css('background', 'url(img/explosion.gif)');
         setTimeout(function() {
           var lose = $('<div>').attr('id', '#losee').addClass('lose');
           $('body').append(lose);
           $(".lose").text('Crash...You Lose');
+          this.SoundMenu.pause();
         }, 500);
       }
     }
     if (hideC == false) {
       if ($(".rocket").collision("#asteroidC").length > 0) {
+        soundER.play();
         console.log("ImpactorocketE");
         $(".rocket").css('background', 'url(img/explosion.gif)');
         setTimeout(function() {
           var lose = $('<div>').attr('id', '#losee').addClass('lose');
           $('body').append(lose);
           $(".lose").text('Crash...You Lose');
+          this.SoundMenu.pause();
         }, 500);
       }
     }
     if (hideD == false) {
       if ($(".rocket").collision("#asteroidD").length > 0) {
+        soundER.play();
         console.log("ImpactorocketE");
         $(".rocket").css('background', 'url(img/explosion.gif)');
         setTimeout(function() {
           var lose = $('<div>').attr('id', '#losee').addClass('lose');
           $('body').append(lose);
           $(".lose").text('Crash...You Lose');
+          this.SoundMenu.pause();
         }, 500);
       }
     }
     if (hideE == false) {
       if ($(".rocket").collision("#asteroidE").length > 0) {
+        soundER.play();
         console.log("ImpactorocketE");
         $(".rocket").css('background', 'url(img/explosion.gif)');
         setTimeout(function() {
           var lose = $('<div>').attr('id', '#losee').addClass('lose');
           $('body').append(lose);
           $(".lose").text('Crash...You Lose');
+          this.SoundMenu.pause();
         }, 500);
       }
     }
-    if ($("#asteroidA").position().top > 970) {
+    if ($("#asteroidA").position().top > 1250) {
       hideA = false;
       $("#asteroidA").css('visibility', 'visible');
 
     }
-    if ($("#asteroidB").position().top > 970) {
+    if ($("#asteroidB").position().top > 1250) {
       hideB = false;
       $("#asteroidB").css('visibility', 'visible');
 
     }
-    if ($("#asteroidC").position().top > 970) {
+    if ($("#asteroidC").position().top > 1250) {
       hideC = false;
       $("#asteroidC").css('visibility', 'visible');
 
     }
-    if ($("#asteroidD").position().top > 970) {
+    if ($("#asteroidD").position().top > 1250) {
       hideD = false;
       $("#asteroidD").css('visibility', 'visible');
 
     }
-    if ($("#asteroidE").position().top > 970) {
+    if ($("#asteroidE").position().top > 1250) {
       hideE = false;
       $("#asteroidE").css('visibility', 'visible');
-
     }
 
 
