@@ -4,33 +4,44 @@ function Shot(name, offsets, vel, id) {
   this.posY = offsets.offY;
   this.vel = vel;
   this.id = id;
+  this.shotCreate();
+  this.shotVertical();
+  $(".score_value").attr("value", "OTRO TEXTO");
 
 }
 Shot.prototype.shotCreate = function() {
-  console.log("Create");
 
-  this.id++;
-  var el = $('<div>').attr('id', this.name+this.id).addClass('shot');
-  $('body').append(el);
-  $("#shot"+this.id).css({
+  this.shotId = $('<div>').addClass('shot');
+  $(this.shotId).css({
     left: this.posX,
     top: this.posY
   });
-  // this.posX = $("#shot1").position().left;
-  // this.posY = $("#shot1").position().top;
+  $('body').append(this.shotId);
 };
 Shot.prototype.shotVertical = function() {
-  this.posY -= this.vel;
-  $("#shot"+this.id).css({
-    left: this.posX,
-    top: this.posY
-  });
+  var that = this;
+  setInterval(function() {
+    that.posY -= that.vel;
+    $(that.shotId).css({
+      left: that.posX,
+      top: that.posY
+    });
+  }, 40);
+
 };
 Shot.prototype.shotLeft = function() {
   this.posX -= this.vel;
   this.posY -= this.vel;
+  $(this.shotId).css({
+    left: this.posX,
+    top: this.posY
+  });
 };
 Shot.prototype.shotRight = function() {
   this.posX += this.vel;
   this.posY -= this.vel;
+  $(this.shotId).css({
+    left: this.posX,
+    top: this.posY
+  });
 };

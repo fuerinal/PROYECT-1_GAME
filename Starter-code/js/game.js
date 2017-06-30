@@ -1,127 +1,112 @@
-var fps = 30;
+function Game() {
 
-var obstacles = ["A", "B", "C", "D", "E"].map(function(e, i) {
-  var speed = (Math.random() * 100 + 150) / fps;
-  return new Obstacle('asteroid' + e, speed, {
-    offX: Math.random() * 400 + 400 * i,
-    offY: 0
-  });
-});
-
-var rockets = ["1"].map(function(e, i) {
-  var arraytheme = ["blue", "red"];
-  return new Rocket('Rocket' + e, {
-    offX: 800 * i / 2,
-    offY: 800
-  }, 100 / fps, 15, 400, arraytheme[i]);
-});
-var m=0;
-
-var shotRocket = [0].map(function(e) {
-  var speed=300;
-
-  return new Shot('shot', {
-    offX: 400,
-    offY:900
-  }, speed, m);
-});
+  this.SoundMenu = new Audio('sounds/menuMusic.mp3');
+  this.SoundBlast = new Audio('sounds/LaserBlast.mp3');
+  this.SoundMenu.play();
 
 
+  this.SoundMenu.loop = true;
+  var that = this;
+  this.fps = 30;
+  this.m = 0;
+  this.CreateObstacles();
+  this.CreateRockets();
+  this.render();
+  this.moveObjects();
+  this.CanShot();
+  this.checkobstacles();
+  this.shotRocket = [];
+}
 
-$('#start').on('click', function() {
-  console.log("click");
-  //CreateArrayShot();
-  shotRocket[0].shotCreate();
-
-m++;
-
-
-});
-
-
-
-
-obstacles.map(function(e) {
-  var elementObsctacle = $('<div>').attr('id', e.name).addClass('asteroid');
-  elementObsctacle.css({
-    top: e.posY,
-    left: e.posX
-  });
-  $('body').append(elementObsctacle);
-});
-
-rockets.map(function(e) {
-  var elementRocket = $('<div>').attr('id', e.name).addClass('rocket');
-  elementRocket.css({
-    top: e.posY,
-    left: e.posX,
-  });
-  $('body').append(elementRocket);
-});
-
-
-// function shoot() {
-//   console.log("shoot");
-//   shotRocket.map(function(e) {
-//     var elementsShoot = $('<div>').attr('id', e.name).addClass('shot');
-//     $('body').append(elementsShoot);
-//     e.shotVertical();
-//
-//     elementsShoot.css({
-//       top: e.posY,
-//       left: e.posX
-//     });
-//   });
-// }
-
-
-
-function moveObstacles() {
-  obstacles.map(function(e) {
-    e.move();
-    var el = $("#" + e.name);
-    el.css({
-      top: e.posY % 1000,
-      left: e.posX
+Game.prototype.CreateObstacles = function() {
+  var i = 0;
+  this.obstacles = ["A", "B", "C", "D", "E"].map(function(e, i) {
+    var speed = (Math.random() * 100 + 150) / this.fps;
+    return new Obstacle('asteroid' + e, speed, {
+      offX: Math.random() * 400 + 400 * i,
+      offY: 0
     });
   });
-}
-setInterval(function() {
-  moveObstacles();
-}, 1000 / fps);
-// setInterval(function() {
-//   PrepareRocket();
-// }, 1000 / fps);
-//
-// function PrepareRocket() {
-//   rockets.map(function(e) {
-//     e.prepare();
-//     var el = $("#" + e.name);
-//     el.css({
-//       top: e.posY,
-//       left: e.posX
-//     });
-//   });
-//
-// }
+};
+Game.prototype.CreateRockets = function() {
+  this.rockets = ["1"].map(function(e, i) {
+    var arraytheme = ["blue", "red"];
+    return new Rocket('Rocket' + e, {
+      offX: 800,
+      offY: 800
+    }, 100 / this.fps, 15, 400, arraytheme[0]);
+  });
 
-function moveRocket() {
-  var moveLeft = false;
-  var moveRight = false;
-  var moveShot = false;
-  var el;
-  var els;
-  var i = 1;
-  setInterval(function() {
-    if (moveShot === true) {
-      console.log(shotRocket[0]);
-      // shotRocket[0].shotCreate();
-      // console.log("Shooot");
+};
 
+Game.prototype.CreateShot = function() {
+  var posXS = $("#Rocket1").position().left + 100;
+  var posYS = $("#Rocket1").position().top;
+  var shot = new Shot('shot', {
+    offX: posXS,
+    offY: posYS
+  }, 20);
+  this.shotRocket.push(shot);
+
+};
+//Disparar
+Game.prototype.CanShot = function() {
+  var that = this;
+
+  $(document).on('keydown', function(e) {
+
+    switch (e.keyCode) {
+      case 32:
+        that.CreateShot();
+        that.SoundBlast.play();
+        break;
     }
-    if (moveLeft === true && moveRight === false) {
+  });
+};
+//RENDERR
+Game.prototype.render = function() {
+  this.obstacles.map(function(e) {
+    var elementObsctacle = $('<div>').attr('id', e.name).addClass('asteroid');
+    elementObsctacle.css({
+      top: e.posY,
+      left: e.posX
+    });
+    $('body').append(elementObsctacle);
+  });
+
+  this.rockets.map(function(e) {
+    var elementRocket = $('<div>').attr('id', e.name).addClass('rocket');
+    elementRocket.css({
+      top: e.posY,
+      left: e.posX,
+    });
+    $('body').append(elementRocket);
+  });
+
+};
+//moveObjects
+Game.prototype.moveObjects = function() {
+  var that = this;
+  that.i = 1;
+  console.log(that.obstacles);
+  console.log(that.obstacles);
+  that.moveLeft = false;
+  that.moveRight = false;
+  that.moveShot = false;
+
+  setInterval(function() {
+    that.obstacles.map(function(e) {
+      e.move();
+      var el = $("#" + e.name);
+      el.css({
+        top: e.posY % 1000,
+        left: e.posX
+      });
+    });
+
+    if (that.moveLeft === true && that.moveRight === false) {
       //console.log("Se mueve Derecha");
-      rockets.map(function(e) {
+      that.rockets.map(function(e) {
         e.moveLeft();
         var el = $("#" + e.name);
         el.css({
@@ -129,15 +114,15 @@ function moveRocket() {
           left: e.posX
         });
       });
-      i--;
-      if (i < 0) {
-        i = 0;
+      that.i--;
+      if (that.i < 0) {
+        that.i = 0;
       }
-      $(".rocket").css('background', 'url(img/frame-0' + i + '.gif)');
+      $(".rocket").css('background', 'url(img/frame-0' + that.i + '.gif)');
     }
     //Movimiento del ROcket
-    if (moveLeft === false && moveRight === true) {
-      rockets.map(function(e) {
+    if (that.moveLeft === false && that.moveRight === true) {
+      that.rockets.map(function(e) {
         e.moveRight();
         var el = $("#" + e.name);
         el.css({
@@ -146,30 +131,29 @@ function moveRocket() {
         });
       });
 
-      i++;
-      if (i > 2) {
-        i = 2;
+      that.i++;
+      if (that.i > 2) {
+        that.i = 2;
       }
-      $(".rocket").css('background', 'url(img/frame-0' + i + '.gif)');
+      $(".rocket").css('background', 'url(img/frame-0' + that.i + '.gif)');
     }
-    if (moveLeft === false && moveRight === false) {
-      i = 1;
-      $(".rocket").css('background', 'url(img/frame-0' + i + '.gif)');
+    if (that.moveLeft === false && that.moveRight === false) {
+      that.i = 1;
+      $(".rocket").css('background', 'url(img/frame-0' + that.i + '.gif)');
     }
-    //console.log(moveLeft);
-    //console.log(moveRight);
+
   }, 40);
 
   $(document).on('keydown', function(e) {
     switch (e.keyCode) {
       case 65:
-        moveLeft = true;
+        that.moveLeft = true;
         break;
       case 68:
-        moveRight = true;
+        that.moveRight = true;
         break;
       case 32:
-        moveShot = true;
+        that.moveShot = true;
         break;
     }
   });
@@ -177,22 +161,117 @@ function moveRocket() {
   $(document).on('keyup', function(a) {
     switch (a.keyCode) {
       case 65:
-        moveLeft = false;
+        that.moveLeft = false;
         break;
       case 68:
-        moveRight = false;
+        that.moveRight = false;
         break;
       case 32:
-        moveShot = false;
+        that.moveShot = false;
         break;
     }
   });
+};
+Game.prototype.checkobstacles = function() {
+  var time=60;
+  setInterval(function() {
+    time-=1;
+    $(".score_time").text(time);
+
+  }, 1000);
+  var i=0;
+  function checkObstacles() {
+    var impactoA, impactoB, impactoC, impactoD, impactoE = false;
+
+    if ($(".shot").collision("#asteroidA").length > 0) {
+      console.log("ImpactoA");
+      impactoA = true;
+      if (impactoA === true) {
+        i=i+10;
+        $("#asteroidA").css('background', 'url(img/explosion.gif)');
+        setTimeout(function() {
+          $("#asteroidA").css('background', 'url(img/Money.gif)');
+        }, 200);
+
+        setTimeout(function() {
+          $("#asteroidA").css('background', 'url(img/Asteroide.gif)');
+
+        }, 500);
+
+      }
+    }
+    if ($(".shot").collision("#asteroidB").length > 0) {
+      console.log("ImpactoB");
+      impactoB = true;
+      if (impactoB === true) {
+        i=i+10;
+        $("#asteroidB").css('background', 'url(img/explosion.gif)');
+        setTimeout(function() {
+          $("#asteroidB").css('background', 'url(img/Money.gif)');
+        }, 200);
+
+        setTimeout(function() {
+          $("#asteroidB").css('background', 'url(img/Asteroide.gif)');
+        }, 500);
+
+      }
+    }
+    if ($(".shot").collision("#asteroidC").length > 0) {
+      console.log("ImpactoC");
+      impactoC = true;
+      if (impactoC === true) {
+        i=i+10;
+        $("#asteroidC").css('background', 'url(img/explosion.gif)');
+        setTimeout(function() {
+          $("#asteroidC").css('background', 'url(img/Money.gif)');
+        }, 200);
+        setTimeout(function() {
+          $("#asteroidC").css('background', 'url(img/Asteroide.gif)');
+        }, 500);
+      }
+    }
+    if ($(".shot").collision("#asteroidD").length > 0) {
+      console.log("ImpactoD");
+      impactoD = true;
+      if (impactoD === true) {
+        i=i+10;
+        $("#asteroidD").css('background', 'url(img/explosion.gif)');
+        setTimeout(function() {
+          $("#asteroidD").css('background', 'url(img/Money.gif)');
+        }, 200);
+        setTimeout(function() {
+          $("#asteroidD").css('background', 'url(img/Asteroide.gif)');
+        }, 500);
+      }
+    }
+    if ($(".shot").collision("#asteroidE").length > 0) {
+      console.log("ImpactorocketE");
+      impactoE = true;
+      if (impactoE === true) {
+        i=i+10;
+        $("#asteroidE").css('background', 'url(img/explosion.gif)');
+        setTimeout(function() {
+          $("#asteroidE").css('background', 'url(img/Money.gif)');
+        }, 200);
+        setTimeout(function() {
+          $("#asteroidE").css('background', 'url(img/Asteroide.gif)');
+        }, 500);
+      }
+    }
+    if ($(".rocket").collision(".asteroid").length > 0) {
+      console.log("ImpactorocketE");
+      $(".rocket").css('background', 'url(img/explosion.gif)');
+      setTimeout(function() {
+        
+      }, 500);
+
+    }
 
 
-  console.log(moveLeft);
-
-}
-
-
-
-moveRocket();
+  }
+  setInterval(function() {
+    $(".score_value").text(i);
+    checkObstacles();
+  }, 40);
+};
+Game();

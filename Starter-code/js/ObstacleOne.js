@@ -3,6 +3,9 @@ function Obstacle(name, vel, offsets) {
   this.posX = offsets.offX;
   this.posY = offsets.offY;
   this.vel = vel;
+  setInterval(function() {
+  this.vel+=1;
+  }, 40);
 
 
 }

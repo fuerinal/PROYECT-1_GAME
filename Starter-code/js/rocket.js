@@ -1,3 +1,4 @@
+
 function Rocket(name, offsets, vel, velRocket,heightPrepare,theme) {
   this.name = name;
   this.posX = offsets.offX;
@@ -6,8 +7,6 @@ function Rocket(name, offsets, vel, velRocket,heightPrepare,theme) {
   this.velRocket = velRocket;
   this.heightPrepare = heightPrepare;
   this.theme = theme;
-
-
   // rocketX = $("#rocket").position().left;
   // rocketY = $("#rocket").position().top;
 }

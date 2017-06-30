@@ -10,12 +10,15 @@ body {
 
 .rocket {
   position: absolute;
-  width: 200px;
+  width: 160px;
   height:  150px;
   z-index: 2;
   /*border: solid 1px white;*/
-  box-shadow: 0px 0px 20px;
+  /*box-shadow: 0px 0px 20px;*/
   background: url('../img/frame-01.gif');
+  background-size: 120%;
+  margin: 0;
+
 }
 
 
@@ -35,6 +38,8 @@ body {
   z-index: 1;
   /*border: solid 1px white;*/
   background: url('../img/Asteroide.gif');
+
+  /*border: solid 1px white;*/
 }
 
 #hide {
@@ -47,8 +52,7 @@ body {
 }
 .shot{
   position:absolute;
-  left: 700px;
-  top: 700px;
+
   width: 2px;
   height: 20px;
   background-color: red;
@@ -58,12 +62,37 @@ body {
 
 
 }
+.score{
+  color: white;
+  font-family: sans-serif;
+  font-size: 50px;
+  position: absolute;
+  top: 900px;
+  left:100px;
+  z-index: 3;
+  width: 100px;
 
+}
+.score_value{
+
+}
+.time{
+  color: white;
+  font-family: sans-serif;
+  font-size: 50px;
+  position: absolute;
+  top: 900px;
+  left:360px;
+  z-index: 2;
+  width: 100px;
+
+}
+/*
 #start {
   position: absolute;
   left: 750px;
   top: 740px;
-  width: 200px;s
+  width: 200px;
   height: 50px;
   background-color: white;
   font-size: 30px;
@@ -71,4 +100,4 @@ body {
   text-transform: uppercase;
   border: solid 2px black;
   box-shadow: 0px 0px 20px white;
-}
+}*/
